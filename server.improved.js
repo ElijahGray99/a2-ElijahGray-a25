@@ -1,3 +1,5 @@
+
+
 const http = require( "http" ),
       fs   = require( "fs" ),
       // IMPORTANT: you must run `npm install` in the directory for this assignment
@@ -8,11 +10,59 @@ const http = require( "http" ),
       dir  = "public/",
       port = 3000
 
-const appdata = [
-  { "model": "toyota", "year": 1999, "mpg": 23 },
-  { "model": "honda", "year": 2004, "mpg": 30 },
-  { "model": "ford", "year": 1987, "mpg": 14} 
-]
+
+class Homework {
+    constructor(ID, homeworkname, subject, expectedtime, date, stress_score) {
+        this.ID = ID;
+        this.subject = subject;
+        this.expectedtime = expectedtime;
+        this.date = date;
+        //this.rank = 0; // update as derived field.
+        this.stress_score = stress_score;
+    }
+}
+
+let homework_table_data = new Map()
+
+function add_homework(Homework_object) {
+
+    if (!homework_table_data.has(Homework_object.ID)) {
+        homework_table_data.set(Homework_object.ID, Homework_object)
+        return true
+    }
+    return false
+
+}
+
+function update_homework(Homework_object) {
+
+    if (homework_table_data.has(Homework_object.ID)) {
+        homework_table_data.set(Homework_object.ID, Homework_object)
+        return true
+    }
+    return false
+
+}
+
+function remove_homework(Homework_object_ID) {
+    if (homework_table_data.has(Homework_object_ID)) {
+        homework_table_data.delete(Homework_object_ID)
+        return true
+    }
+    return false
+}
+
+
+function compute_stress_score(homework_date, homework_time) {
+    const current_time = new Date();
+    const due_date = new Date(homework_date);
+    const time_left = (due_date.getTime() - current_time.getTime())
+        / (1000 * 3600);
+    output = (homework_time * 100) - time_left;
+    return Math.max(0,Math.floor(output));
+}
+
+
 
 const server = http.createServer( function( request,response ) {
   if( request.method === "GET" ) {
@@ -23,13 +73,18 @@ const server = http.createServer( function( request,response ) {
 })
 
 const handleGet = function( request, response ) {
-  const filename = dir + request.url.slice( 1 ) 
+    const filename = dir + request.url.slice(1)
 
-  if( request.url === "/" ) {
-    sendFile( response, "public/index.html" )
-  }else{
-    sendFile( response, filename )
-  }
+    if (request.url === "/") {
+        sendFile(response, "public/index.html")
+    } else if (request.url === "/data") { // my first request!
+        response.writeHead(200, "OK", {"Content-Type": "application/json"});
+        updated_table = JSON.stringify([...homework_table_data.values()]);
+        response.end(updated_table);
+    }  else {
+        sendFile( response, filename )
+    }
+
 }
 
 const handlePost = function( request, response ) {
@@ -42,10 +97,27 @@ const handlePost = function( request, response ) {
   request.on( "end", function() {
     console.log( JSON.parse( dataString ) )
 
+      JSONObject = JSON.parse( dataString )
+
     // ... do something with the data here!!!
 
-    response.writeHead( 200, "OK", {"Content-Type": "text/plain" })
-    response.end("test")
+      switch (request.url) {
+        case "/submit":
+            handle_new_data(JSONObject);
+            break;
+        case "/delete":
+            delete_data(JSONObject);
+            break;
+      }
+
+
+     response.writeHead(200, "OK", {"Content-Type": "text/plain"});
+     updated_table = JSON.stringify([...homework_table_data.values()]);
+     response.end(updated_table);
+
+
+    //response.writeHead( 200, "OK", {"Content-Type": "text/plain" });
+    //response.end("test");
   })
 }
 
@@ -71,4 +143,47 @@ const sendFile = function( response, filename ) {
    })
 }
 
+const handle_new_data = function(JSONObject) {
+    date = JSONObject.date;
+    time_expected = JSONObject.expectedtime;
+    ID = JSONObject.ID
+
+    // if it exists, we update the item, if it doesn't we add it to the map.
+    if (!homework_table_data.has(ID)) {
+        add_homework(
+            new Homework(
+                ID,
+                JSONObject.homeworkname,
+                JSONObject.subject,
+                time_expected,
+                date,
+                compute_stress_score(date, time_expected) // calculate stress-score.
+            )
+        )
+    } else {
+        update_homework(
+            new Homework(
+                ID,
+                JSONObject.homeworkname,
+                JSONObject.subject,
+                time_expected,
+                date,
+                compute_stress_score(date, time_expected) // calculate stress-score.
+            )
+        )
+    }
+}
+
+const delete_data = function(dataJSON) {
+    ID = dataJSON.ID
+    // if it exists, we delete it.
+    if (homework_table_data.has(ID)) {
+        homework_table_data.delete(ID)
+    }
+
+}
+
+
+
 server.listen( process.env.PORT || port )
+

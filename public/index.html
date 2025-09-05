@@ -1,18 +1,68 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
   <head>
+
     <title>CS4241 Assignment 2</title>
+
     <meta charset="utf-8">
-    <script src="js/main.js"></script>
     <link rel="stylesheet" href="css/main.css">
     
     <!-- get rid of favicon error -->
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
   </head>
+
   <body>
+
+    <header>
+        <img src = "img/logo.png" alt = "logo" />
+        <h1>CS4241 Assignment 2</h1>
+    </header>
+
+
     <form>
-      <input type="text" id="yourname" value="your name here">
+      <input type="number" id="ID" placeholder="ID" required>
+      <input type="text" id="subject" placeholder="Subject" required>
+      <input type="number" id="expectedtime" placeholder="Hours expected" required>
+      <input type="date" id="date" required>
       <button>submit</button>
+
     </form>
+    <!--
+    https://www.geeksforgeeks.org/javascript/how-to-create-an-html-table-from-an-object-array-using-javascript/#
+    https://stackoverflow.com/questions/52919972/how-can-i-populate-a-table-with-javascript
+    -->
+
+    <table id="homework-table">
+
+        <thead>
+            <tr>
+                <th>Homework Name</th>
+                <th>Due Date</th>
+                <th>Expected Hours</th>
+                <th>Stress Score</th>
+            </tr>
+        </thead>
+
+        <tbody id = "homework-table-body">
+        <!-- this will be filled by javascript code -->
+        </tbody>
+
+    </table>
+
+
+    <div id = "delete_area">
+        <input type = "text" id = "delete-id" placeholder="ID to delete">
+        <button id = "delete-button">Delete</button>
+    </div>
+
+
+
+   <script src="js/main.js"></script>
+
   </body>
+
+
+
 </html>
