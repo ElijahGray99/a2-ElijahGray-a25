@@ -31,19 +31,13 @@ const submit = async function( event ) {
     })
 
     // get server response
-    const text = await response.text(); //json(); // .text();
+    const text = await response.text();
 
     const data = JSON.parse(text);
     render_table(data);
 
     console.log("main-text:", text);
-    alert(text);
-
-
-
-
-
-
+    //alert(text);
 
 }
 
@@ -92,7 +86,7 @@ const load_table = async function( event ) {
 
 const delete_item = async function( event ) {
     event.preventDefault();
-    ID_to_Delete = document.querySelector("#delete-id").value
+    const ID_to_Delete = document.querySelector("#delete-id").value
 
     const response = await fetch( "/delete", {
         method:"POST",

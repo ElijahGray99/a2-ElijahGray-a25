@@ -17,7 +17,6 @@ class Homework {
         this.subject = subject;
         this.expectedtime = expectedtime;
         this.date = date;
-        //this.rank = 0; // update as derived field.
         this.stress_score = stress_score;
     }
 }
@@ -44,25 +43,14 @@ function update_homework(Homework_object) {
 
 }
 
-function remove_homework(Homework_object_ID) {
-    if (homework_table_data.has(Homework_object_ID)) {
-        homework_table_data.delete(Homework_object_ID)
-        return true
-    }
-    return false
-}
-
-
 function compute_stress_score(homework_date, homework_time) {
     const current_time = new Date();
     const due_date = new Date(homework_date);
     const time_left = (due_date.getTime() - current_time.getTime())
         / (1000 * 3600);
-    output = (homework_time * 100) - time_left;
+    let output = (homework_time * 100) - time_left;
     return Math.max(0,Math.floor(output));
 }
-
-
 
 const server = http.createServer( function( request,response ) {
   if( request.method === "GET" ) {
@@ -79,7 +67,7 @@ const handleGet = function( request, response ) {
         sendFile(response, "public/index.html")
     } else if (request.url === "/data") { // my first request!
         response.writeHead(200, "OK", {"Content-Type": "application/json"});
-        updated_table = JSON.stringify([...homework_table_data.values()]);
+        let updated_table = JSON.stringify([...homework_table_data.values()]);
         response.end(updated_table);
     }  else {
         sendFile( response, filename )
@@ -97,7 +85,7 @@ const handlePost = function( request, response ) {
   request.on( "end", function() {
     console.log( JSON.parse( dataString ) )
 
-      JSONObject = JSON.parse( dataString )
+      let JSONObject = JSON.parse( dataString )
 
     // ... do something with the data here!!!
 
@@ -112,12 +100,9 @@ const handlePost = function( request, response ) {
 
 
      response.writeHead(200, "OK", {"Content-Type": "text/plain"});
-     updated_table = JSON.stringify([...homework_table_data.values()]);
+     let updated_table = JSON.stringify([...homework_table_data.values()]);
      response.end(updated_table);
 
-
-    //response.writeHead( 200, "OK", {"Content-Type": "text/plain" });
-    //response.end("test");
   })
 }
 
@@ -144,9 +129,10 @@ const sendFile = function( response, filename ) {
 }
 
 const handle_new_data = function(JSONObject) {
-    date = JSONObject.date;
-    time_expected = JSONObject.expectedtime;
-    ID = JSONObject.ID
+
+    let date = JSONObject.date;
+    let time_expected = JSONObject.expectedtime;
+    let ID = JSONObject.ID
 
     // if it exists, we update the item, if it doesn't we add it to the map.
     if (!homework_table_data.has(ID)) {
@@ -175,7 +161,7 @@ const handle_new_data = function(JSONObject) {
 }
 
 const delete_data = function(dataJSON) {
-    ID = dataJSON.ID
+    let ID = dataJSON.ID
     // if it exists, we delete it.
     if (homework_table_data.has(ID)) {
         homework_table_data.delete(ID)
