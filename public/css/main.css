@@ -1,5 +1,127 @@
-body {
-  background:black;
-  color:white;
+
+@import url(https://fonts.googleapis.com/css2?family=Asimovian&display=swap);
+
+:root {
+    --color-primary: #41C596ff;
+    --color-background: #b52424;
+    --color-background-secondary: #000000;
+    --color-text-primary: #ffffff;
 }
+
+
+
+body {
+
+    background: var(--color-background);
+    color: var(--color-background-secondary);
+
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    "header"
+    "form"
+    "table-area"
+    "delete-area";
+
+    gap: 1.5rem;
+    padding: 2rem;
+    font-family: Asimovian, serif;
+
+    overflow-y: auto;
+
+}
+
+h1 {
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+p {
+    text-align: center;
+    font-weight: bold;
+    color: var(--color-background-secondary);
+}
+
+#delete-area {
+    color: black;
+    background-color: var(--color-primary);
+    border: black solid 3px;
+    margin: auto;
+    max-width: 500px;
+}
+
+#form-area {
+    color: black;
+    background-color: var(--color-primary);
+    border: black solid 3px;
+    margin: auto;
+    max-width: 800px;
+}
+
+
+
+
+.header {
+    grid-area: header;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    align-items: center;
+    justify-content: left;
+    gap: 1rem;
+}
+
+.header .title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+    align-self: center;
+}
+
+.header .logo {
+    max-height: 100px;
+    width: auto;
+    justify-self: center;
+}
+
+.table {
+    grid-area: table-area;
+}
+
+.form {
+    grid-area: form;
+}
+
+.delete-area {
+    grid-area: delete-area;
+    max-width: 800px;
+    margin: auto;
+}
+
+.table-area {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    table-layout: fixed;
+    text-align: center;
+    border-bottom: 0.05rem var(--color-background-secondary);
+    border-top: 0.1rem var(--color-background-secondary);
+}
+
+.table-area th, .table-area td {
+    word-wrap: break-word;
+    background-color: var(--color-text-primary);
+    border: 0.9 var(--color-text-primary);
+}
+
+.table-area th:nth-child(2), .table-area td:nth-child(2) {
+    text-align: left;
+}
+
+body, table, th, td, input, button, tbody {
+    font-family: 'Asimovian', serif;
+}
+
+
+
 

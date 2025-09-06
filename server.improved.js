@@ -23,6 +23,7 @@ class Homework {
 
 let homework_table_data = new Map()
 
+// I had an idea to add some data validation methods but the return true, false aspect isn't being used currently.
 function add_homework(Homework_object) {
 
     if (!homework_table_data.has(Homework_object.ID)) {

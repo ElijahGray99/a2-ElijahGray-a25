@@ -3,7 +3,7 @@
 
   <head>
 
-    <title>CS4241 Assignment 2</title>
+    <title>CS-4241 Assignment 2: Assignment Priority generator</title>
 
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/main.css">
@@ -15,32 +15,36 @@
 
   <body>
 
-    <header>
-        <img src = "img/logo.png" alt = "logo" />
-        <h1>CS4241 Assignment 2</h1>
+    <header class = "header">
+        <img src = "img/icon.png" class = "logo" alt = "logo" />
+        <h1 class = "title" > Assignment Priority generator </h1>
     </header>
 
 
-    <form>
+    <div class = "form" id = "form-area">
+       <p> add/update new assignment by ID </p>
       <input type="number" id="ID" placeholder="ID" required>
       <input type="text" id="subject" placeholder="Subject" required>
       <input type="number" id="expectedtime" placeholder="Hours expected" required>
       <input type="date" id="date" required>
       <button>submit</button>
 
-    </form>
+    </div>
+
     <!--
+    https://www.w3schools.com/html/html_forms.asp
     https://www.geeksforgeeks.org/javascript/how-to-create-an-html-table-from-an-object-array-using-javascript/#
     https://stackoverflow.com/questions/52919972/how-can-i-populate-a-table-with-javascript
     -->
 
-    <table id="homework-table">
+    <table id="homework-table" class =  "table-area">
 
         <thead>
             <tr>
-                <th>Homework Name</th>
+                <th>ID</th>
+                <th>Subject</th>
+                <th>Hours expected</th>
                 <th>Due Date</th>
-                <th>Expected Hours</th>
                 <th>Stress Score</th>
             </tr>
         </thead>
@@ -52,7 +56,8 @@
     </table>
 
 
-    <div id = "delete_area">
+    <div id = "delete-area" class = "delete-area" >
+        <p> remove assignment by ID </p>
         <input type = "text" id = "delete-id" placeholder="ID to delete">
         <button id = "delete-button">Delete</button>
     </div>
