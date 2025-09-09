@@ -30,6 +30,20 @@ Design
 after I tasked them to make a plan for their extremely real homework assignments. They said my design was intuitive but
 could be more visually clear.
 
+Comments:
+
+Father:
+"It was a little annoying having to move the mouse all the way down to delete on my laptop."
+just keep the two ways of modifying data together.
+
+
+Sister:
+"The table is a little ugly, can you make it easier to see the cells?"
+add more contrast between cells.
+
+"I dont like how the cells are the same size, the text looks funny"
+make cells widths based on the content within.
+
 Based on feedback: added alternating colors in the table, made the title section stand out, added titles to the form sections, put the remove and add/edit section next to eachother.
 
 2 - Tried to incorporate both flex and gridbox design to get a feel for both of them and how I can use them together.
