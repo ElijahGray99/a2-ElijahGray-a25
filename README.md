@@ -1,3 +1,15 @@
+Title: Homework priority generator.
+
+Description: This website is a simple tool to organize what assignments you should be prioritizing first.
+Homeworks have: a ID, a subject, estimated time to complete, and a due-date. The server calculates a stress-score
+based on the due-date and time to complete. This data is sent back to the client to populate a table
+organized from the highest score to the smallest score on the bottom. Adding data is easy by filling out the forms and click submit.
+Editing data likewise, if the ID already exists, any submission
+will simply update the content of that homework.
+To remove a homework you have hopefully completed, input the ID number of the homework and click delete.
+
+
+
 Acheivements:
 
 
@@ -49,6 +61,9 @@ Based on feedback: added alternating colors in the table, made the title section
 2 - Tried to incorporate both flex and gridbox design to get a feel for both of them and how I can use them together.
     It seems like grid is good for the big picture whereas flex seems to be great for making sub-elements look 
     good (The logo and title)
+
+
+Website Link:
 
 
 
