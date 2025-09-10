@@ -63,7 +63,14 @@ Based on feedback: added alternating colors in the table, made the title section
     good (The logo and title)
 
 
-Website Link:
+Notes on AI usage:
+AI was used to request examples from chatgpt and gemini on my phone on usage of things such as flexbox and grid. I also had
+I asked some debugging questions in regards to CSS and html. I had also tried to use it debug when I was having some problems
+like with my html file not displaying properly. 
+
+
+Website Link: https://a2-elijahgray-a25.onrender.com/
+
 
 
 

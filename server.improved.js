@@ -67,9 +67,13 @@ const handleGet = function( request, response ) {
     if (request.url === "/") {
         sendFile(response, "public/index.html")
     } else if (request.url === "/data") { // my first request!
-        response.writeHead(200, "OK", {"Content-Type": "application/json"});
+        // added citation.
+        //https://www.geeksforgeeks.org/node-js/node-js-response-writehead-method/#
+
+        response.writeHead(200, "OK", {"Content-Type": "text/plain"});
         let updated_table = JSON.stringify([...homework_table_data.values()]);
         response.end(updated_table);
+
     }  else {
         sendFile( response, filename )
     }
