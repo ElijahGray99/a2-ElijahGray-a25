@@ -11,6 +11,7 @@ const http = require( "http" ),
       port = 3000
 
 
+// the main class that holds all my data for homework assignments.
 class Homework {
     constructor(ID, homeworkname, subject, expectedtime, date, stress_score) {
         this.ID = ID;
@@ -21,26 +22,36 @@ class Homework {
     }
 }
 
+// the main data structure of my server which holds all the assignments in a map for quick access.
 let homework_table_data = new Map()
 
 // I had an idea to add some data validation methods but the return true, false aspect isn't being used currently.
+
+// add data
 function add_homework(Homework_object) {
 
     if (!homework_table_data.has(Homework_object.ID)) {
-        homework_table_data.set(Homework_object.ID, Homework_object)
-        return true
+        homework_table_data.set(Homework_object.ID, Homework_object);
     }
-    return false
 
 }
 
+//update data.
 function update_homework(Homework_object) {
 
     if (homework_table_data.has(Homework_object.ID)) {
-        homework_table_data.set(Homework_object.ID, Homework_object)
-        return true
+        homework_table_data.set(Homework_object.ID, Homework_object);
     }
-    return false
+
+}
+
+// delete data
+const delete_data = function(dataJSON) {
+    let ID = dataJSON.ID
+    // if it exists, we delete it.
+    if (homework_table_data.has(ID)) {
+        homework_table_data.delete(ID);
+    }
 
 }
 
@@ -137,10 +148,11 @@ const handle_new_data = function(JSONObject) {
 
     let date = JSONObject.date;
     let time_expected = JSONObject.expectedtime;
-    let ID = JSONObject.ID
+    let ID = JSONObject.ID;
 
     // if it exists, we update the item, if it doesn't we add it to the map.
     if (!homework_table_data.has(ID)) {
+
         add_homework(
             new Homework(
                 ID,
@@ -150,8 +162,10 @@ const handle_new_data = function(JSONObject) {
                 date,
                 compute_stress_score(date, time_expected) // calculate stress-score.
             )
-        )
+        );
+
     } else {
+
         update_homework(
             new Homework(
                 ID,
@@ -161,17 +175,9 @@ const handle_new_data = function(JSONObject) {
                 date,
                 compute_stress_score(date, time_expected) // calculate stress-score.
             )
-        )
-    }
-}
+        );
 
-const delete_data = function(dataJSON) {
-    let ID = dataJSON.ID
-    // if it exists, we delete it.
-    if (homework_table_data.has(ID)) {
-        homework_table_data.delete(ID)
     }
-
 }
 
 

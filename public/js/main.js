@@ -10,10 +10,10 @@ const submit = async function( event ) {
     // remains to this day
     event.preventDefault();
 
-    const ID = document.querySelector("#ID").value
-    const subject = document.querySelector("#subject").value
-    const expectedtime = document.querySelector("#expectedtime").value
-    const date = document.querySelector("#date").value
+    const ID = document.querySelector("#ID").value;
+    const subject = document.querySelector("#subject").value;
+    const expectedtime = document.querySelector("#expectedtime").value;
+    const date = document.querySelector("#date").value;
 
     // get info from the user's inputs
     const fields = {
@@ -21,14 +21,14 @@ const submit = async function( event ) {
         subject: subject,
         expectedtime: expectedtime,
         date: date,
-    }
+    };
 
     // format data
-    const body = JSON.stringify(fields)
+    const body = JSON.stringify(fields);
 
     const response = await fetch( "/submit", {
         method:"POST", body
-    })
+    });
 
     // get server response
     const text = await response.text();
@@ -44,7 +44,7 @@ const submit = async function( event ) {
 // prepare elements for when the web-page loads!
 window.onload = function() {
 
-    homework_table = document.querySelector( "#homework-table-body" )
+    homework_table = document.querySelector( "#homework-table-body" );
 
     const button = document.querySelector("button");
     delete_button = document.querySelector("#delete-button");
@@ -84,7 +84,7 @@ function render_table(data) {
         `;
 
         // add row to the table
-        homework_table.appendChild(row)
+        homework_table.appendChild(row);
     })
 
 
@@ -107,7 +107,7 @@ const load_table = async function() {
 const delete_item = async function( event ) {
     event.preventDefault();
 
-    const ID_to_Delete = document.querySelector("#delete-id").value
+    const ID_to_Delete = document.querySelector("#delete-id").value;
     //alert(ID_to_Delete)
 
     // made it its own line to make it more clear what is happening.
